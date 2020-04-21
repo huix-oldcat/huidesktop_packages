@@ -1,0 +1,208 @@
+body {
+  background: #fff;
+  margin: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 0;
+  
+}
+#navi-container {
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.16);
+}
+#form-container {
+  position: absolute;
+  height: calc(100% - 70px);
+  box-shadow: 1px 0 3px 2px rgba(0, 0, 0, 0.16);
+  top: 50px;
+  padding-top: 20px;
+  left: 0;
+  z-index: 98;
+  width: 360px;
+  /* margin-left: 30px; */
+  font-family: 'Courier New', Courier, monospace;
+}
+#title {
+  font-size: 18px;
+  line-height: 50px;
+  margin-left: 30px;
+  color: rgb(97, 97, 97);
+
+}
+.param-item {
+  
+  width: 100%;
+  height: 40px;
+}
+.param-item > label {  
+  /* text-align: bottom; */
+  margin-left: 30px;
+  vertical-align: bottom;
+  line-height: 40px;
+  font-weight: bold;
+  color: rgb(94, 94, 94);
+
+}
+.param-item > input {
+  width: 130px;
+  font-size: 15px;
+  height: 30px;
+  line-height: 30px;
+  color: rgb(97, 97, 97);
+  font-family: 'Courier New', Courier, monospace;
+  padding: 0 0 0 10px; 
+  /* border-radius: 2px; */
+  outline: none;
+  border: none;
+  border-bottom: solid 1.5px rgb(168, 168, 168);
+  float: right;
+  margin-right: 60px;
+  transition: all 0.5s;
+}
+*::selection {
+  background-color: rgba(0, 0, 0, 0.596);
+  color: rgb(214, 214, 214);
+}
+.param-item > input:hover,
+.param-item > input:focus {
+  border-bottom: solid 1.5px rgb(97, 97, 97);
+  color: black;
+}
+.param-item > button {
+  float: none;
+}
+#prev-container {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  overflow: scroll;
+  
+  width: calc(100% - 360px);
+  height: calc(100% - 50px);
+  background-color: #d8d8d8;
+}
+#view {
+  border: dotted 2px rgba(0, 0, 0, 0.658);
+}
+.param-item-1 {
+  height: 40px;
+  /* margin-left: 30px; */
+}
+.param-item-1 > input {
+  width: 180px;
+  padding-left: 20px;
+  height: 25px;
+  outline: none;
+  line-height: 25px;
+  margin-top: 10px;
+  margin-left: 30px;
+  border-radius: 5px;
+  transition: all 0.5s;
+  border: solid 1px rgb(214, 214, 214);
+}
+.param-item-1 > button {
+  background-color: rgba(0, 10, 32, 0.61);
+  color: #fff;
+  transition: all 0.5s;
+  width: 60px;
+  outline: none;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  border: none;
+  height: 30px;
+  line-height: 30px;
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.param-item-1 > button:hover{
+  background-color: rgba(0, 10, 32, 0.466);
+  cursor: pointer;
+}
+.param-item-1 > input:focus {
+  border: solid 1px rgb(141, 141, 141);
+}
+#param-title {
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+#config {
+  resize: none;
+  display: inline-block;
+  width: 180px;
+  padding-left: 20px;
+  height: 25px;
+  outline: none;
+  line-height: 25px;
+  vertical-align: middle;
+  /* margin-top: 10px; */
+  user-select: text;
+  -webkit-user-select: text;
+  margin-left: 30px;
+  border-radius: 5px;
+  transition: all 0.5s;
+  font-size: 12px;
+  border: solid 1px rgb(214, 214, 214);
+  font-family: 'Courier New', Courier, monospace;
+}
+.param-item-2 {
+  height: 40px;
+}
+#cp {
+  display: inline-block;
+  background-color: rgba(0, 10, 32, 0.61);
+  color: #fff;
+  transition: all 0.5s;
+  width: 60px;
+  outline: none;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  border: none;
+  height: 30px;
+  line-height: 30px;
+  font-size: 13px;
+  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.param-item-3 {
+  font-weight: normal;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+#fgcolor,
+#bgcolor {
+  float: right;
+  margin-right: 60px;
+  display: inline-block;
+  width: 70px;
+  height: 20px;
+  border-radius: 3px;
+  border: solid 1px #b9b9b9;
+  /* vertical-align: middle; */
+  /* margin-bottom: 5px;  */
+}
+#fgcolor {
+  background-color: #3f3f3f;
+}
+#bgcolor {
+  background-color: #d8d8d8;
+}
+#subtitle {
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: rgb(97, 97, 97);
+}
+#cp:hover {
+  
+  background-color: rgba(0, 10, 32, 0.466);
+  cursor: pointer;
+}

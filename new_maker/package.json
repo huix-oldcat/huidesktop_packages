@@ -1,0 +1,6 @@
+{
+  "strongName": "cc.huix.spine_adjuster",
+  "friendlyName": "公测-坐标调整工具",
+  "description": "用于图形化调整适合Spine小人动画的宽高, 坐标",
+  "startInfo": []
+}
