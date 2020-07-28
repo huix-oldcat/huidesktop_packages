@@ -11,7 +11,7 @@ body {
   user-select: none;
   -webkit-user-select: none;
   padding: 0;
-  
+
 }
 #navi-container {
   position: absolute;
@@ -42,11 +42,11 @@ body {
 
 }
 .param-item {
-  
+
   width: 100%;
   height: 40px;
 }
-.param-item > label {  
+.param-item > label {
   /* text-align: bottom; */
   margin-left: 30px;
   vertical-align: bottom;
@@ -55,14 +55,15 @@ body {
   color: rgb(94, 94, 94);
 
 }
-.param-item > input {
+.param-item > input, select {
   width: 130px;
   font-size: 15px;
   height: 30px;
   line-height: 30px;
   color: rgb(97, 97, 97);
   font-family: 'Courier New', Courier, monospace;
-  padding: 0 0 0 10px; 
+  padding: 0 0 0 10px;
+  box-sizing: content-box;
   /* border-radius: 2px; */
   outline: none;
   border: none;
@@ -88,13 +89,39 @@ body {
   top: 50px;
   right: 0;
   overflow: scroll;
-  
+
   width: calc(100% - 360px);
   height: calc(100% - 50px);
   background-color: #d8d8d8;
 }
 #view {
+  position: absolute;
   border: dotted 2px rgba(0, 0, 0, 0.658);
+}
+#bottom,
+#right,
+#bottom-right{
+  position: absolute;
+  /*background: #00f;*/
+}
+#bottom{
+  width: calc(100% - 10px);
+  height: 5px;
+  bottom: 0;
+  cursor: s-resize;
+}
+#right{
+  width: 5px;
+  height: calc(100% - 10px);
+  right: 0;
+  cursor: e-resize;
+}
+#bottom-right{
+  width: 10px;
+  height: 10px;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
 }
 .param-item-1 {
   height: 40px;
@@ -119,6 +146,7 @@ body {
   width: 60px;
   outline: none;
   border-radius: 5px;
+  margin-top: 10px;
   vertical-align: middle;
   text-align: center;
   border: none;
@@ -134,21 +162,26 @@ body {
 .param-item-1 > input:focus {
   border: solid 1px rgb(141, 141, 141);
 }
+.player {
+    margin-left: 30px;
+    margin-right: 5px;
+    text-align: center;
+}
 #param-title {
   margin-top: 30px;
   margin-left: 30px;
   margin-bottom: 10px;
 }
-#config {
+textarea {
   resize: none;
   display: inline-block;
-  width: 180px;
+  width: 175px;
   padding-left: 20px;
   height: 25px;
   outline: none;
   line-height: 25px;
   vertical-align: middle;
-  /* margin-top: 10px; */
+  margin-top: 10px;
   user-select: text;
   -webkit-user-select: text;
   margin-left: 30px;
@@ -156,12 +189,13 @@ body {
   transition: all 0.5s;
   font-size: 12px;
   border: solid 1px rgb(214, 214, 214);
+  overflow: hidden;
   font-family: 'Courier New', Courier, monospace;
 }
 .param-item-2 {
   height: 40px;
 }
-#cp {
+/*#cp {
   display: inline-block;
   background-color: rgba(0, 10, 32, 0.61);
   color: #fff;
@@ -175,9 +209,9 @@ body {
   height: 30px;
   line-height: 30px;
   font-size: 13px;
-  
+
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+}*/
 .param-item-3 {
   font-weight: normal;
   margin-left: 30px;
@@ -209,7 +243,7 @@ body {
   color: rgb(97, 97, 97);
 }
 #cp:hover {
-  
+
   background-color: rgba(0, 10, 32, 0.466);
   cursor: pointer;
 }
@@ -220,38 +254,50 @@ body {
 </head>
 <body>
     <div id="navi-container">
-        <div id="title">动态坐标调整工具</div>        
+        <div id="title">动态坐标调整工具</div>
     </div>
 
 <form id="form-container">
-    
     <div class="param-item"><label for="width">Width:</label>
-        <input type="number" id="width" value="600"
-                                            onchange="changeSettings('width')" oninput="changeSettings('width')"><br/>
-    
-    </div><div class="param-item"><label for="height">Height:</label>
-        <input type="number" id="height" value="600" onchange="changeSettings('height')"
-                                              oninput="changeSettings('height')"><br/>
-    </div><div class="param-item"><label for="x0">X0:</label>
-        <input type="number" id="x0" value="200" onchange="changeSettings('x0')"
-                                      oninput="changeSettings('x0')"><br/>
-    </div><div class="param-item"><label for="y0">Y0:</label>
-        <input type="number" id="y0" value="0" onchange="changeSettings('y0')"
-                                      oninput="changeSettings('y0')"><br/>
-    </div><div class="param-item"><label for="name">Animation:</label>
-        <input type="text" id="name" value="Relax"
-                                               onchange="changeSettings('name')" oninput="changeSettings('name')"><br/>
-    </div><div class="param-item"><label for="zoom">zoom:</label>
-        <input type="number" step="0.1" id="zoom" onchange="changeSettings('zoom')"
-                                          oninput="changeSettings('zoom')" value="1">
-    </div><div class="param-item-1"><label for="go"></label>
-        <input type="text" id="go">
-    <button type="button" onclick="goRefresh()">Go</button>
-    <br/>
+        <input type="number" id="width" value="600" class="update"><br/>
+
+    </div>
+    <div class="param-item"><label for="height">Height:</label>
+        <input type="number" id="height" value="600" class="update"><br/>
+    </div>
+    <div class="param-item"><label for="x0">X0:</label>
+        <input type="number" id="x0" value="200" class="update"><br/>
+    </div>
+    <div class="param-item"><label for="y0">Y0:</label>
+        <input type="number" id="y0" value="0" class="update"><br/>
+    </div>
+    <div class="param-item"><label for="name">Animation:</label>
+        <select type="text" id="name" class="update">
+        </select><br/>
+    </div>
+    <div class="param-item"><label for="zoom">zoom:</label>
+        <input type="number" step="0.1" id="zoom" value="1" class="update">
+    </div>
+    <div class="param-item"><label for="speed">speed:</label>
+        <input type="number" step="0.01" id="speed" value="1" class="update">
+        <br/>
+    </div>
+
+    <div class="param-item-1">
+        <button type="button" class="player">prev</button>
+        <button type="button" id="playAndPause" class="player">pause</button>
+        <button type="button" class="player">next</button>
+        <br/>
+    </div>
+    <div class="param-item-1">
+        <label for="go"></label>
+        <textarea id="go" placeholder="input: (/)*(.skel)" wrap=off></textarea>
+        <button type="button" onclick="goRefresh()">Go</button>
+        <br/>
     </div>
     <div id="param-title">调整好后复制下框中内容至生成器</div>
-    <div class="param-item param-item-2">
-        <textarea id="config" readonly> </textarea>
+    <div class="param-item-1 param-item-2">
+        <textarea id="config" wrap=off readonly></textarea>
         <button id="cp" type="button" onclick="copyText()">Copy</button>
     </div>
     <div id="subtitle">Adjuster Setting</div>
@@ -263,14 +309,20 @@ body {
       <div id="bgcolor"></div>
     <br/>
     </div>
-    
+
 </form>
 <div><strong id="hit">0</strong></div>
-<div id="prev-container"><div id="view"></div></div>
+<div id="prev-container">
+    <div id="view">
+        <div id="bottom"></div>
+        <div id="right"></div>
+        <div id="bottom-right"></div>
+    </div>
+</div>
+
 <script src="../shared/pixi.js"></script>
-<script src="../shared/pixi-spine.js"></script>
-<script>
-    
+<script src="../shared/pixi-spine.js" charset="utf-8"></script>
+<script type="text/javascript">
     let paramList = new Array(4);
     // huiDesktopAsync.SetWindowPos(0, 0);
     let app = new PIXI.Application({backgroundColor: 0x3f3f3f}), animation, view, zoom, hit = 0;
@@ -281,11 +333,11 @@ body {
     // var bgcolor = document.getElementById("bgcolor");
     // fgcolor.disable = false;
     // bgcolor.disable = false;
-    
+
     // init
     // fgcolor.value = "#3f3f3f";
-    // bgcolor.value = "#d8d8d8"; 
-    
+    // bgcolor.value = "#d8d8d8";
+
     let prevcontainer = document.getElementById("prev-container");
     // console.log(prevcontainer);
     $('#fgcolor').paigusu({
@@ -297,7 +349,7 @@ body {
       }
     );
     $('#bgcolor').paigusu({
-        color : '#d8d8d8'        
+        color : '#d8d8d8'
       },
       function(event, obj){
         console.log(obj);
@@ -305,15 +357,19 @@ body {
         prevcontainer.style.backgroundColor = "#"+obj.hex;
       }
     )
-    
+
     //color select end
-    
+
     // result
     config = document.getElementById('config');
     view = document.getElementById('view');
     view.appendChild(app.view);
+    app.view.setAttribute('id', 'char');
     app.resizeTo = view;
-    app.loader.add('spineCharacter', window.location.hash.slice(1))
+    let char = window.location.hash.slice(1);
+    char = /.*\.skel$/.test(char)? char: char + '.skel'; // 可以不输入.skel
+    char = /^\.{0,2}\/.*/.test(char)? char: '../' + char; // 可以不输入.skel/
+    app.loader.add('spineCharacter', char)
         .load(function (loader, resources) {
             animation = new PIXI.spine.Spine(resources.spineCharacter.spineData);
             animation.interactive = true;
@@ -321,6 +377,12 @@ body {
                 hit += 1;
                 document.getElementById('hit').innerText = hit.toString();
             });
+            // 动态生成动画选项
+            animation.spineData.animations.forEach( val => {
+                $('#name').append('<option>' + val.name + '</option>')
+            });
+            $("#name option:first").prop("selected", 'selected');
+
             app.stage.addChild(animation);
             changeSettings('zoom');
             changeSettings('width');
@@ -331,8 +393,8 @@ body {
         });
 
     function changeSettings(name) {
-        
-        let val = document.getElementById(name).value;
+        let val = $('#' + name).val();
+        let zoom = parseFloat($('#zoom').val());
         switch (name) {
             case 'width':
                 view.style.width = (val * zoom).toString() + 'px';
@@ -342,35 +404,80 @@ body {
             case 'height':
                 view.style.height = (val * zoom).toString() + 'px';
                 app.height = val * zoom;
+                // app.height = val; // 使用app.stage.scale缩放时
                 paramList[1] = val;
                 app.resize();
                 changeSettings('y0');
                 break;
             case 'x0':
                 animation.x = parseInt(val) * zoom;
+                // animation.x = parseInt(val); // 使用app.stage.scale缩放时
                 paramList[2] = val;
                 break;
             case 'y0':
                 animation.y = (app.height - parseInt(val) * zoom);
+                // animation.y = (app.height - parseInt(val)); // 使用app.stage.scale缩放时
                 paramList[3] = val;
                 break;
             case 'name':
                 animation.state.setAnimation(0, val, true);
                 break;
             case 'zoom':
-                zoom = val;
                 changeSettings('x0');
                 changeSettings('width');
                 changeSettings('height');
-                animation.skeleton.scaleX = zoom;
-                animation.skeleton.scaleY = zoom;
+                // animation.skeleton.scaleX = zoom; // 会导致碧蓝航线-柴郡头部缩放出错
+                // animation.skeleton.scaleY = zoom; //
+                // app.stage.scale.x = zoom; // 正常缩放，但x0、y0会等缩放显示（值不变），需改动其他代码
+                // app.stage.scale.y = zoom;
+                // animation.scale.x = zoom; // 正常缩放，且x0、y0不会等缩放显示，无需改动其他代码
+                // animation.scale.y = zoom;
+                animation.scale.set(zoom); // 同时设置x、y
+                break;
+            case 'speed':
+                animation.state.timeScale = $('#speed').val();
                 break;
         }
         config.value = paramList.join(' ');
     }
 
+    $('.param-item > input, select').change( e => {
+        changeSettings(e.target.id);
+    })
+    $('.param-item > input, select').keyup( e =>{
+        changeSettings(e.target.id);
+    })
+
+    function setTimeScale(action) {
+        if (!animation) return;
+        switch (action) {
+            case 'prev':
+                setTimeScale('pause');
+                animation.state.tracks[0].trackTime -= 1 / 30;
+                break;
+            case 'next':
+                setTimeScale('pause');
+                animation.state.tracks[0].trackTime += 1 / 30;
+                break;
+            case 'pause':
+                $('#speed').val(0);
+                changeSettings('speed');
+                $('#playAndPause').text('play');
+                break;
+            case 'play':
+                $('#speed').val(1);
+                changeSettings('speed');
+                $('#playAndPause').text('pause');
+                break;
+        };
+    }
+
+    $('.player').click(e => {
+        setTimeScale(e.target.innerText);
+    })
+
     function goRefresh() {
-        window.location.href = '/cc.huix/spine_adjuster/index.html#' + document.getElementById('go').value;
+        window.location.href = window.location.pathname + '#' + $('#go').val();
         window.location.reload();
     }
     // copy config content
@@ -378,6 +485,85 @@ body {
         config.select();
         document.execCommand("Copy");
     }
+    // Enter 绑定 goRefresh()
+    $('#go').keydown(e => {
+        if (e.key == 'Enter') {
+            goRefresh();
+        };
+    })
+
+    $('#prev-container')[0].onmousewheel = e => {
+        if (!animation) return;
+        var e = e || window.event;
+        var zoom = parseFloat($('#zoom').val());
+        zoom += e.wheelDelta > 0? 0.1: -0.1;
+        $('#zoom').val(zoom.toFixed(1));
+        changeSettings('zoom');
+    }
+    // 拖动角色
+    $('#char').mousedown( e => {
+        if (!animation) return;
+        var e = e || window.event;
+        mx = e.clientX;
+        my = e.clientY;
+        x = animation.x;
+        y = animation.y;
+        vh = null;
+        document.onmousemove = e => {
+            var e = e || window.event;
+            var mX = e.clientX;
+            var mY = e.clientY;
+            var zoom = parseFloat($('#zoom').val());
+            var X = (mX - mx + x) / zoom;
+            // var X = x + (mX - mx) / zoom; // 使用app.stage.scale缩放时
+            var Y = (mY - my + y) / zoom;
+            // var Y = y + (mY - my) / zoom; // 使用app.stage.scale缩放时
+            vh = vh==null? Math.abs(mX - mx) > Math.abs(mY - my): vh;
+            if (!e.shiftKey || vh) {
+                $('#x0').val(X.toFixed());
+                changeSettings('x0');
+            };
+            if (!e.shiftKey || !vh) {
+                $('#y0').val(app.height / zoom - Y.toFixed());
+                // $('#y0').val(app.height - Y.toFixed()); // 使用app.stage.scale缩放时
+                changeSettings('y0');
+            };
+        };
+        document.onmouseup = () => {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    });
+    // 拖动边框
+    $('#bottom, #right, #bottom-right').mousedown( e => {
+        if (!animation) return;
+        var e = e || window.event;
+        id = e.target.id;
+        mx = e.clientX;
+        my = e.clientY;
+        w = $('#view').width();
+        h = $('#view').height();
+        document.onmousemove = e => {
+            var e = e || window.event;
+            var mX = e.clientX;
+            var mY = e.clientY;
+            var zoom = parseFloat($('#zoom').val());
+            var W = (mX - mx + w) / zoom;
+            var H = (mY - my + h) / zoom;
+            if (id.match('right')) {
+                $('#width').val(W.toFixed());
+                changeSettings('width');
+            };
+            if (id.match('bottom')) {
+                $('#height').val(H.toFixed());
+                changeSettings('height');
+            };
+        };
+        document.onmouseup = () => {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        };
+    });
 </script>
 </body>
 </html>
